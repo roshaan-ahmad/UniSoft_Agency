@@ -1,194 +1,36 @@
-"use client";
-
-import Link from "next/link";
-import React, { useEffect } from "react";
-import { motion } from "framer-motion";
+// app/about/page.js  (SERVER component: no "use client" here)
+import AboutClient from "./AboutClient";
 import SeoSchema from "../components/SeoSchema";
-import { aboutSchema } from "../lib/schema";
+import { aboutSchema, breadcrumbSchema } from "../lib/schema";
 
-<SeoSchema schema={aboutSchema} />
-function About() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+const description =
+  "UniSoft is a software development and digital growth agency building web apps, SEO systems and AI automation for businesses worldwide. Meet our team and see how we work.";
 
-  const fadeUp = {
-    hidden: { opacity: 0, y: 40 },
-    show: { opacity: 1, y: 0 },
-  };
+export const metadata = {
+  title: "About UniSoft – Software, SEO & AI Automation",
+  description,
+  alternates: { canonical: "/about" },
+  // Setting openGraph here replaces the layout's openGraph object, so repeat the image.
+  openGraph: {
+    type: "website",
+    url: "/about",
+    title: "About UniSoft – Software, SEO & AI Automation",
+    description,
+    images: ["/og-image.jpg"],
+  },
+};
 
+export default function AboutPage() {
   return (
-    <section className="aboutSection">
-
-      {/* BACKGROUND */}
-      <div className="aboutGlow" />
-      <div className="aboutGrid" />
-
-      <div className="aboutContainer">
-
-        {/* HERO INTRO */}
-        <motion.div
-          className="aboutHero"
-          initial="hidden"
-          whileInView="show"
-          variants={fadeUp}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <span className="badge">ABOUT UNISOFT</span>
-
-          <h1>
-            We Build Digital Products That Drive Growth
-          </h1>
-
-          <p>
-            UniSoft delivers modern software, scalable web applications,
-            and intelligent digital solutions that help businesses grow,
-            automate, and succeed in the digital era.
-          </p>
-        </motion.div>
-
-        {/* CORE CARDS */}
-        <div className="aboutGridCards">
-
-          {[
-            {
-              title: "Who We Are",
-              desc:
-                "A team of passionate engineers and designers building scalable digital products with modern technologies.",
-              icon: "ri-team-line",
-            },
-            {
-              title: "What We Do",
-              desc:
-                "We create websites, web apps, SEO systems, and automation tools that improve business performance.",
-              icon: "ri-code-s-slash-line",
-            },
-            {
-              title: "Why Choose Us",
-              desc:
-                "We combine strategy, design, and engineering to deliver powerful digital solutions that actually grow businesses.",
-              icon: "ri-rocket-line",
-            },
-          ].map((item, i) => (
-            <motion.div
-              key={i}
-              className="aboutCard"
-              initial="hidden"
-              whileInView="show"
-              variants={fadeUp}
-              transition={{ delay: i * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <i className={item.icon}></i>
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* MISSION + VISION */}
-        <div className="aboutSplit">
-
-          <motion.div
-            className="splitCard"
-            initial="hidden"
-            whileInView="show"
-            variants={fadeUp}
-            viewport={{ once: true }}
-          >
-            <h2>Our Mission</h2>
-            <p>
-              Empower businesses with scalable, reliable, and innovative
-              software solutions that accelerate digital transformation.
-            </p>
-          </motion.div>
-
-          <motion.div
-            className="splitCard"
-            initial="hidden"
-            whileInView="show"
-            variants={fadeUp}
-            viewport={{ once: true }}
-          >
-            <h2>Our Vision</h2>
-            <p>
-              To become a global technology partner delivering impactful
-              digital experiences and intelligent automation systems.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* TECHNOLOGIES */}
-        <motion.div
-          className="techStack"
-          initial="hidden"
-          whileInView="show"
-          variants={fadeUp}
-          viewport={{ once: true }}
-        >
-          <h2>Technologies We Use</h2>
-
-          <div className="techTags">
-            {[
-              "React",
-              "Next.js",
-              "Node.js",
-              "MongoDB",
-              "Python",
-              "Tailwind",
-              "AWS",
-              "WordPress",
-            ].map((tech, i) => (
-              <span key={i}>{tech}</span>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* STATS */}
-        <div className="statsGrid">
-
-          {[
-            { value: "50+", label: "Projects Completed" },
-            { value: "30+", label: "Happy Clients" },
-            { value: "5+", label: "Years Experience" },
-          ].map((stat, i) => (
-            <motion.div
-              key={i}
-              className="statCard"
-              initial="hidden"
-              whileInView="show"
-              variants={fadeUp}
-              transition={{ delay: i * 0.2 }}
-              viewport={{ once: true }}
-            >
-              <h3>{stat.value}</h3>
-              <p>{stat.label}</p>
-            </motion.div>
-          ))}
-
-        </div>
-
-        {/* CTA */}
-        <motion.div
-          className="aboutCTA"
-          initial="hidden"
-          whileInView="show"
-          variants={fadeUp}
-          viewport={{ once: true }}
-        >
-          <h2>Let’s Build Something Powerful Together</h2>
-          <p>Start your digital transformation with UniSoft today.</p>
-
-          <Link href="/quote" className="ctaBtn">
-            Get In Touch
-            <i className="ri-arrow-right-line"></i>
-          </Link>
-        </motion.div>
-
-      </div>
-    </section>
+    <>
+      <SeoSchema schema={aboutSchema} />
+      <SeoSchema
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "About", path: "/about" },
+        ])}
+      />
+      <AboutClient />
+    </>
   );
 }
-
-export default About;

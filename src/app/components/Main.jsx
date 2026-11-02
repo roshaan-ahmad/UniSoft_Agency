@@ -1,10 +1,26 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import "../styles.css";
+import "../styles.css"; // keep the path your original file used
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import Link from "next/link";
+
+/* =========================================================
+   TRUST SWITCHES
+   The client-logo strip and the testimonials use generic names
+   (EduSmart, TechNova, RetailPrime...) that I could not verify.
+   They are OFF by default. Turn one ON only when every name is a real
+   client who agreed to be shown (ideally with a link or a logo they supplied).
+========================================================= */
+const SHOW = {
+  brands: false,
+  testimonials: false,
+};
+
+// TODO: one source of truth. These must match /about, /portfolio and /ceo
+// (About says 50+ projects / 30+ clients, CEO says 500+ clients).
+const STATS = { projects: "100+", clients: "50+", years: "5+" };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -15,6 +31,8 @@ const stagger = {
   show: { opacity: 1, transition: { staggerChildren: 0.12 } },
 };
 
+// TODO: replace these stock photos with real screenshots of your own projects
+// (hosted in /public/assets). Stock photos add nothing for SEO and load from a third party.
 const heroImages = [
   "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
   "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80",
@@ -25,7 +43,7 @@ const heroImages = [
 const statsData = [
   {
     icon: "ri-stack-line",
-    val: "100+",
+    val: STATS.projects,
     label: "Projects Done",
     sub: "Delivered worldwide",
     color: "#38bdf8",
@@ -35,7 +53,7 @@ const statsData = [
   },
   {
     icon: "ri-group-line",
-    val: "50+",
+    val: STATS.clients,
     label: "Happy Clients",
     sub: "Long-term relationships",
     color: "#22c55e",
@@ -45,7 +63,7 @@ const statsData = [
   },
   {
     icon: "ri-medal-line",
-    val: "5+",
+    val: STATS.years,
     label: "Years Experience",
     sub: "Delivering excellence",
     color: "#f59e0b",
@@ -100,6 +118,7 @@ const servicesData = [
     desc: "Android & iOS apps that deliver seamless performance and outstanding user experience.",
     readMore: "Cross-platform and native mobile apps built with React Native — fast, beautiful, and ready for the app stores.",
     color: "#ec4899",
+    // TODO: create /services/mobile-app-development. Right now this duplicates the Software Development link.
     link: "/services/software-development",
   },
   {
@@ -145,12 +164,12 @@ const FlipCard = ({ s, isFlipped, onFlip }) => {
             className="mainFlipIcon"
             style={{ background: `${s.color}18`, border: `1px solid ${s.color}30` }}
           >
-            <i className={s.icon} style={{ color: s.color, fontSize: 24 }}></i>
+            <i className={s.icon} style={{ color: s.color, fontSize: 24 }} aria-hidden="true"></i>
           </div>
           <h3 className="mainFlipTitle">{s.title}</h3>
           <p className="mainFlipDesc">{s.desc}</p>
           <span className="mainFlipHint">
-            <i className="ri-refresh-line"></i> Click to read more
+            <i className="ri-refresh-line" aria-hidden="true"></i> Click to read more
           </span>
         </div>
         {/* BACK */}
@@ -159,7 +178,7 @@ const FlipCard = ({ s, isFlipped, onFlip }) => {
             className="mainFlipIcon"
             style={{ background: `${s.color}20`, border: `1px solid ${s.color}40` }}
           >
-            <i className={s.icon} style={{ color: s.color, fontSize: 24 }}></i>
+            <i className={s.icon} style={{ color: s.color, fontSize: 24 }} aria-hidden="true"></i>
           </div>
           <h3 className="mainFlipTitle" style={{ color: s.color }}>{s.title}</h3>
           <p className="mainFlipBackDesc">{s.readMore}</p>
@@ -167,9 +186,10 @@ const FlipCard = ({ s, isFlipped, onFlip }) => {
             href={s.link}
             className="mainFlipBtn"
             style={{ borderColor: `${s.color}50`, color: s.color }}
+            aria-label={`Read more about ${s.title}`}
             onClick={(e) => e.stopPropagation()}
           >
-            Read More <i className="ri-arrow-right-line"></i>
+            Read More <i className="ri-arrow-right-line" aria-hidden="true"></i>
           </Link>
         </div>
       </div>
@@ -199,15 +219,18 @@ const Main = () => {
             {/* LEFT */}
             <motion.div initial="hidden" animate="show" variants={fadeUp}>
               <div className="mainBadge">
-                <i className="ri-rocket-line"></i> Trusted Software Development Company
+                <i className="ri-rocket-line" aria-hidden="true"></i> Trusted Software Development Company
               </div>
               <h1 className="mainH1">
                 Transforming Businesses Through{" "}
                 <span className="mainGrad">
+                  {/* preRenderFirstString puts the first phrase in the server HTML,
+                      so Google sees a real H1 instead of "Transforming Businesses Through" */}
                   <TypeAnimation
-                    sequence={["Software & Innovation", 2000, "Web Development", 2000, "Digital Marketing", 2000, "Business Automation", 2000]}
+                    sequence={["Custom Software Development", 2000, "Web Development", 2000, "SEO & Digital Marketing", 2000, "Business Automation", 2000]}
                     speed={50}
                     repeat={Infinity}
+                    preRenderFirstString={true}
                   />
                 </span>
               </h1>
@@ -217,7 +240,7 @@ const Main = () => {
               </p>
               <div className="mainBtns">
                 <Link href="/contact" className="mainBtnPrimary">
-                  Get Free Consultation <i className="ri-arrow-right-line"></i>
+                  Get Free Consultation <i className="ri-arrow-right-line" aria-hidden="true"></i>
                 </Link>
                 <Link href="/services" className="mainBtnSecondary">
                   View Our Services
@@ -227,14 +250,14 @@ const Main = () => {
               {/* Mini Stats */}
               <div className="mainMiniStats">
                 {[
-                  { val: "5+", label: "Years Exp", icon: "ri-calendar-check-line", color: "#6366f1" },
-                  { val: "100+", label: "Projects", icon: "ri-bar-chart-grouped-line", color: "#38bdf8" },
-                  { val: "50+", label: "Clients", icon: "ri-group-line", color: "#22c55e" },
+                  { val: STATS.years, label: "Years Exp", icon: "ri-calendar-check-line", color: "#6366f1" },
+                  { val: STATS.projects, label: "Projects", icon: "ri-bar-chart-grouped-line", color: "#38bdf8" },
+                  { val: STATS.clients, label: "Clients", icon: "ri-group-line", color: "#22c55e" },
                   { val: "24/7", label: "Support", icon: "ri-headphone-line", color: "#ec4899" },
                 ].map((s, i) => (
                   <div key={i} className="mainMiniStat">
                     <div className="mainMiniStatTop">
-                      <i className={s.icon} style={{ color: s.color, fontSize: 15 }}></i>
+                      <i className={s.icon} style={{ color: s.color, fontSize: 15 }} aria-hidden="true"></i>
                       <span className="mainMiniVal">{s.val}</span>
                     </div>
                     <span className="mainMiniLabel">{s.label}</span>
@@ -262,6 +285,9 @@ const Main = () => {
                     <div
                       key={i}
                       className="mainImgSlide"
+                      role="img"
+                      aria-label={`UniSoft software development showcase, slide ${i + 1}`}
+                      aria-hidden={imgIdx !== i}
                       style={{
                         backgroundImage: `url(${img})`,
                         opacity: imgIdx === i ? 1 : 0,
@@ -274,6 +300,8 @@ const Main = () => {
                     {heroImages.map((_, i) => (
                       <button
                         key={i}
+                        type="button"
+                        aria-label={`Show slide ${i + 1}`}
                         className={`mainImgDot${imgIdx === i ? " active" : ""}`}
                         onClick={() => setImgIdx(i)}
                       />
@@ -284,7 +312,7 @@ const Main = () => {
 
               {/* Floating tag — no AI icon */}
               <div className="mainFloatTag">
-                <i className="ri-rocket-2-line" style={{ color: "#38bdf8", fontSize: 20 }}></i>
+                <i className="ri-rocket-2-line" style={{ color: "#38bdf8", fontSize: 20 }} aria-hidden="true"></i>
                 <div>
                   <p className="mainFloatTitle">Innovation First</p>
                   <p className="mainFloatSub">Smart Enterprise Solutions</p>
@@ -296,19 +324,22 @@ const Main = () => {
         </div>
       </section>
 
-      {/* ── BRANDS TICKER ── */}
-      <div className="mainBrandBanner">
-        <p className="mainBrandLabel">Trusted By Businesses Worldwide</p>
-        <div className="mainBrandScroll">
-          <div className="mainBrandTrack">
-            {[...brands, ...brands].map((b, i) => (
-              <div key={i} className="mainBrandItem">
-                <i className={b.icon}></i> {b.name}
-              </div>
-            ))}
+      {/* ── BRANDS TICKER (off until the client names are real) ── */}
+      {SHOW.brands && (
+        <div className="mainBrandBanner">
+          <p className="mainBrandLabel">Trusted By Businesses Worldwide</p>
+          <div className="mainBrandScroll">
+            <div className="mainBrandTrack">
+              {[...brands, ...brands].map((b, i) => (
+                // the second copy only exists for the scrolling loop, so hide it from assistive tech
+                <div key={i} className="mainBrandItem" aria-hidden={i >= brands.length ? true : undefined}>
+                  <i className={b.icon} aria-hidden="true"></i> {b.name}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* ── STATS ── */}
       <section className="mainStatsSection">
@@ -325,11 +356,11 @@ const Main = () => {
             className="mainStatsGrid"
           >
             {statsData.map((s) => (
-              <motion.div key={s.val} variants={fadeUp} className="mainStatCard">
+              <motion.div key={s.label} variants={fadeUp} className="mainStatCard">
                 <div className="mainStatCardInner" style={{ borderColor: s.border }}>
                   <div className="mainStatTopRow">
                     <div className="mainStatIconBox" style={{ background: s.bg, border: `1px solid ${s.border}` }}>
-                      <i className={s.icon} style={{ color: s.color, fontSize: 24 }}></i>
+                      <i className={s.icon} style={{ color: s.color, fontSize: 24 }} aria-hidden="true"></i>
                     </div>
                     <span className="mainStatNum" style={{ color: s.color }}>{s.val}</span>
                   </div>
@@ -351,7 +382,7 @@ const Main = () => {
         <div className="mainInner">
           <div className="mainSectionHead">
             <span className="mainEyebrow">Our Services</span>
-            <h2>Solutions That Drive Your Business Forward</h2>
+            <h2>Software, Web &amp; AI Automation Services That Drive Growth</h2>
           </div>
           <motion.div
             variants={stagger}
@@ -368,7 +399,7 @@ const Main = () => {
           </motion.div>
           <div className="mainSectionCta">
             <Link href="/services" className="mainBtnPrimary">
-              View All Services <i className="ri-arrow-right-line"></i>
+              View All Services <i className="ri-arrow-right-line" aria-hidden="true"></i>
             </Link>
           </div>
         </div>
@@ -379,7 +410,7 @@ const Main = () => {
         <div className="mainInner">
           <div className="mainSectionHead">
             <span className="mainEyebrow">Featured Projects</span>
-            <h2>Our Recent Work</h2>
+            <h2>Our Recent Work: Web Apps, E-commerce &amp; Automation</h2>
           </div>
           <motion.div
             variants={stagger}
@@ -397,10 +428,10 @@ const Main = () => {
               <motion.div key={p.title} variants={fadeUp} className="mainPortfolioCard">
                 {p.external ? (
                   <a href={p.href} target="_blank" rel="noopener noreferrer" className="mainPortfolioLink">
-                    <div className="mainPortfolioImg" style={{ backgroundImage: `url(${p.image})` }}>
+                    <div className="mainPortfolioImg" role="img" aria-label={`${p.title} project preview`} style={{ backgroundImage: `url(${p.image})` }}>
                       <div className="mainPortfolioOverlay" />
                       <span className="mainPortfolioTag">
-                        <i className={p.icon}></i> {p.type}
+                        <i className={p.icon} aria-hidden="true"></i> {p.type}
                       </span>
                     </div>
                     <div className="mainPortfolioInfo">
@@ -410,10 +441,10 @@ const Main = () => {
                   </a>
                 ) : (
                   <Link href={p.href} className="mainPortfolioLink">
-                    <div className="mainPortfolioImg" style={{ backgroundImage: `url(${p.image})` }}>
+                    <div className="mainPortfolioImg" role="img" aria-label={`${p.title} project preview`} style={{ backgroundImage: `url(${p.image})` }}>
                       <div className="mainPortfolioOverlay" />
                       <span className="mainPortfolioTag">
-                        <i className={p.icon}></i> {p.type}
+                        <i className={p.icon} aria-hidden="true"></i> {p.type}
                       </span>
                     </div>
                     <div className="mainPortfolioInfo">
@@ -425,48 +456,57 @@ const Main = () => {
               </motion.div>
             ))}
           </motion.div>
+
+          {/* NEW: the homepage had no link to your /portfolio page */}
+          <div className="mainSectionCta">
+            <Link href="/portfolio" className="mainBtnPrimary">
+              View Full Portfolio <i className="ri-arrow-right-line" aria-hidden="true"></i>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* ── TESTIMONIALS ── */}
-      <section id="testimonials" className="mainTestiSection">
-        <div className="mainInner">
-          <div className="mainSectionHead">
-            <span className="mainEyebrow">Client Reviews</span>
-            <h2>Trusted by Businesses, Loved by Clients</h2>
+      {/* ── TESTIMONIALS (off until they are real, named and approved) ── */}
+      {SHOW.testimonials && (
+        <section id="testimonials" className="mainTestiSection">
+          <div className="mainInner">
+            <div className="mainSectionHead">
+              <span className="mainEyebrow">Client Reviews</span>
+              <h2>Trusted by Businesses, Loved by Clients</h2>
+            </div>
+            <motion.div
+              variants={stagger}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true, margin: "-80px" }}
+              className="mainTestiGrid"
+            >
+              {[
+                { initials: "AR", name: "Ahmed Raza", role: "CEO, EduSmart", text: "UniSoft delivered an amazing website for our business. Their team is professional, responsive, and highly skilled.", color: "#6366f1" },
+                { initials: "SK", name: "Sarah Khan", role: "Marketing Head, TechNova", text: "The automation solution provided by UniSoft has significantly improved our business efficiency and saved us hours daily.", color: "#38bdf8" },
+                { initials: "UT", name: "Usman Tariq", role: "Founder, RetailPrime", text: "Great experience working with UniSoft. They delivered our project on time and exceeded our expectations completely.", color: "#22c55e" },
+              ].map((t) => (
+                <motion.div key={t.name} variants={fadeUp} className="mainTestiCard">
+                  <div className="mainTestiQuoteIcon">
+                    <i className="ri-double-quotes-l" aria-hidden="true"></i>
+                  </div>
+                  <p className="mainTestiText">{t.text}</p>
+                  <div className="mainTestiStars" aria-label="5 out of 5 stars">★★★★★</div>
+                  <div className="mainTestiClient">
+                    <div className="mainTestiAvatar" style={{ background: `linear-gradient(135deg, ${t.color}, ${t.color}99)` }}>
+                      {t.initials}
+                    </div>
+                    <div>
+                      <h4>{t.name}</h4>
+                      <span>{t.role}</span>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           </div>
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-80px" }}
-            className="mainTestiGrid"
-          >
-            {[
-              { initials: "AR", name: "Ahmed Raza", role: "CEO, EduSmart", text: "UniSoft delivered an amazing website for our business. Their team is professional, responsive, and highly skilled.", color: "#6366f1" },
-              { initials: "SK", name: "Sarah Khan", role: "Marketing Head, TechNova", text: "The automation solution provided by UniSoft has significantly improved our business efficiency and saved us hours daily.", color: "#38bdf8" },
-              { initials: "UT", name: "Usman Tariq", role: "Founder, RetailPrime", text: "Great experience working with UniSoft. They delivered our project on time and exceeded our expectations completely.", color: "#22c55e" },
-            ].map((t) => (
-              <motion.div key={t.name} variants={fadeUp} className="mainTestiCard">
-                <div className="mainTestiQuoteIcon">
-                  <i className="ri-double-quotes-l"></i>
-                </div>
-                <p className="mainTestiText">{t.text}</p>
-                <div className="mainTestiStars">★★★★★</div>
-                <div className="mainTestiClient">
-                  <div className="mainTestiAvatar" style={{ background: `linear-gradient(135deg, ${t.color}, ${t.color}99)` }}>
-                    {t.initials}
-                  </div>
-                  <div>
-                    <h4>{t.name}</h4>
-                    <span>{t.role}</span>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* ── FOUNDER ── */}
       <section id="about" className="mainFounderSection">
@@ -479,47 +519,67 @@ const Main = () => {
             className="mainFounderCard"
           >
             <div className="mainFounderImgBox">
-              <img src="/assets/ceoo.jpeg" alt="Roshaan Ahmad - CEO UniSoft" className="mainFounderImg" />
+              {/* TODO: add the file's real width/height (or switch to next/image) to prevent layout shift */}
+              <img
+                src="/assets/ceoo.jpeg"
+                alt="Roshaan Ahmad, Founder & CEO of UniSoft"
+                className="mainFounderImg"
+                loading="lazy"
+                decoding="async"
+              />
               <div className="mainFounderImgGlow" />
+              {/* was "Verified Expert": nothing on the site shows who verified him */}
               <div className="mainFounderBadgeFloat">
-                <i className="ri-verified-badge-line" style={{ color: "#38bdf8" }}></i>
-                <span>Verified Expert</span>
+                <i className="ri-verified-badge-line" style={{ color: "#38bdf8" }} aria-hidden="true"></i>
+                <span>Founder &amp; CEO</span>
               </div>
             </div>
             <div className="mainFounderContent">
               <span className="mainEyebrow">Meet Our Founder</span>
               <h2>Roshaan Ahmad</h2>
-              <h5>CEO & Full Stack Developer</h5>
+              <h5>CEO &amp; Full Stack Developer</h5>
               <p>
-                With 5+ years of experience in software development and automation, Roshaan leads
+                With {STATS.years} years of experience in software development and automation, Roshaan leads
                 UniSoft with a vision to empower businesses through technology and innovation.
               </p>
               <div className="mainFounderBullets">
                 {[
                   { icon: "ri-code-s-slash-line", text: "Full Stack Developer (MERN)" },
-                  { icon: "ri-time-line", text: "5+ Years Experience" },
-                  { icon: "ri-bar-chart-line", text: "100+ Successful Projects" },
+                  { icon: "ri-time-line", text: `${STATS.years} Years Experience` },
+                  { icon: "ri-bar-chart-line", text: `${STATS.projects} Successful Projects` },
                   { icon: "ri-settings-4-line", text: "Automation Expert" },
                   { icon: "ri-trophy-line", text: "Committed to Client Success" },
                 ].map((b) => (
                   <div key={b.text} className="mainFounderBullet">
-                    <i className={b.icon} style={{ color: "#38bdf8", fontSize: 16 }}></i>
+                    <i className={b.icon} style={{ color: "#38bdf8", fontSize: 16 }} aria-hidden="true"></i>
                     <span>{b.text}</span>
                   </div>
                 ))}
               </div>
               <div className="mainFounderSocials">
                 {[
-                  ["ri-whatsapp-fill", "https://wa.me/923148588707"],
-                  ["ri-facebook-fill", "https://www.facebook.com/profile.php?id=61568003026936"],
-                  ["ri-instagram-line", "https://www.instagram.com/unisoftpvt"],
-                  ["ri-github-fill", "https://github.com/unisoftpvt"],
-                ].map(([icon, href]) => (
-                  <a key={icon} href={href} className="mainSocialBtn">
-                    <i className={icon}></i>
+                  ["ri-whatsapp-fill", "https://wa.me/923148588707", "Chat with UniSoft on WhatsApp"],
+                  ["ri-linkedin-fill", "https://www.linkedin.com/in/roshaan-ahmad-35056b41b/", "Roshaan Ahmad on LinkedIn"],
+                  ["ri-facebook-fill", "https://www.facebook.com/profile.php?id=61568003026936", "UniSoft on Facebook"],
+                  ["ri-instagram-line", "https://www.instagram.com/unisoftpvt", "UniSoft on Instagram"],
+                  ["ri-github-fill", "https://github.com/unisoftpvt", "UniSoft on GitHub"],
+                ].map(([icon, href, label]) => (
+                  <a
+                    key={icon}
+                    href={href}
+                    className="mainSocialBtn"
+                    aria-label={label}
+                    target="_blank"
+                    rel={href.includes("wa.me") ? "noopener noreferrer" : "me noopener noreferrer"}
+                  >
+                    <i className={icon} aria-hidden="true"></i>
                   </a>
                 ))}
               </div>
+              {/* NEW: the homepage never linked to the /ceo page */}
+              <Link href="/ceo" className="mainBtnSecondary">
+                View Roshaan&apos;s full profile
+              </Link>
             </div>
           </motion.div>
 
@@ -536,7 +596,7 @@ const Main = () => {
               <p>Let&apos;s discuss how we can help you achieve your goals.</p>
             </div>
             <Link href="/quote" className="mainCtaBtn">
-              Get Free Consultation <i className="ri-arrow-right-line"></i>
+              Get Free Consultation <i className="ri-arrow-right-line" aria-hidden="true"></i>
             </Link>
           </motion.div>
         </div>
