@@ -35,7 +35,7 @@ const NavBar = () => {
                   <div className="">
                     <Link href="/about" className="navDropdownItem">
                       <i className="fa-solid fa-building"></i>
-                      <span>UniSoft Agency</span>
+                      <span>Company</span>
                     </Link>
                   </div>
                     <div className="">
