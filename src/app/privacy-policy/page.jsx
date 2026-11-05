@@ -10,10 +10,9 @@
 // ─────────────────────────────────────────────────────────────────────────────
 
 import React from "react";
-import Link from "next/link";
 import SeoSchema from "../components/SeoSchema";
 import { breadcrumbSchema } from "../lib/schema";
-import "../styles.css";
+import "./privacy.css";
 
 const title       = "Privacy Policy | UniSoft – AI Automation & Software Development";
 const description =

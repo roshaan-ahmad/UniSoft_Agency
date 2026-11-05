@@ -4,6 +4,7 @@ import { blogs } from "./data.js";
 import SeoSchema from "../components/SeoSchema";
 import { blogIndexSchema, breadcrumbSchema } from "../lib/schema";
 import { getExcerpt, formatDate } from "./utils";
+import "./blogs.css";
 
 const description =
   "Practical guides on Next.js, web development, SEO, UI/UX design and AI automation for businesses, written by the UniSoft team.";

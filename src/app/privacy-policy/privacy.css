@@ -1,0 +1,421 @@
+/* app/privacy-policy/privacy-policy.css
+   Modern dark "glass" redesign for the UniSoft Privacy Policy page.
+   Everything is scoped under .policy-page so it won't leak into the navbar/footer. */
+
+.policy-page {
+  --pp-bg: #060a18;
+  --pp-text: #e8ecf8;
+  --pp-muted: #94a3c0;
+  --pp-border: rgba(148, 163, 220, 0.14);
+  --pp-border-hover: rgba(99, 140, 255, 0.55);
+  --pp-accent: #5b8cff;
+  --pp-accent-2: #22d3ee;
+  --pp-accent-3: #8b5cf6;
+  --pp-grad: linear-gradient(135deg, #5b8cff 0%, #8b5cf6 100%);
+  --pp-grad-text: linear-gradient(90deg, #ffffff 0%, #9db8ff 55%, #22d3ee 100%);
+  --pp-radius: 22px;
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--pp-text);
+  background:
+    radial-gradient(900px 500px at 10% -5%, rgba(91, 140, 255, 0.16), transparent 60%),
+    radial-gradient(800px 500px at 95% 15%, rgba(139, 92, 246, 0.14), transparent 60%),
+    var(--pp-bg);
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+/* subtle grid texture across the whole page */
+.policy-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(148, 163, 220, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 220, 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse at 50% 20%, #000 20%, transparent 75%);
+  pointer-events: none;
+}
+
+/* the old decorative layers are replaced by the page background */
+.policy-page .teamGradient,
+.policy-page .teamGrid {
+  display: none;
+}
+
+/* ───────────── HERO ───────────── */
+.policy-page .policy-hero {
+  position: relative;
+  padding: clamp(7rem, 12vw, 9.5rem) 1.5rem clamp(3rem, 6vw, 4.5rem);
+  text-align: center;
+}
+
+.policy-page .policy-hero::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  width: min(720px, 90vw);
+  height: 320px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(closest-side, rgba(91, 140, 255, 0.28), transparent);
+  filter: blur(40px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.policy-page .policy-hero-content {
+  max-width: 820px;
+  margin: 0 auto;
+  animation: pp-rise 0.7s ease both;
+}
+
+.policy-page .policy-hero h1 {
+  margin: 0 0 1.25rem;
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: var(--pp-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.policy-page .policy-hero p {
+  margin: 0 auto;
+  max-width: 700px;
+  font-size: clamp(1rem, 1.6vw, 1.12rem);
+  line-height: 1.8;
+  color: var(--pp-muted);
+}
+
+.policy-page .policy-hero p strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.policy-page .policy-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 2rem;
+}
+
+.policy-page .policy-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.5rem 1.05rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #c9d6ff;
+  background: rgba(91, 140, 255, 0.1);
+  border: 1px solid rgba(91, 140, 255, 0.28);
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+}
+
+.policy-page .policy-meta span::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--pp-accent-2);
+  box-shadow: 0 0 10px var(--pp-accent-2);
+}
+
+/* ───────────── CARD GRID ───────────── */
+.policy-page .policy-content {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 3rem;
+}
+
+/* Overview + Policy Updates span the full width */
+.policy-page .policy-content > .policy-card:first-of-type,
+.policy-page .policy-content > .policy-card:last-of-type {
+  grid-column: 1 / -1;
+}
+
+.policy-page .policy-card {
+  position: relative;
+  padding: 2rem 2rem 2.1rem;
+  border-radius: var(--pp-radius);
+  border: 1px solid var(--pp-border);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.015));
+  box-shadow: 0 10px 40px -18px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+  animation: pp-rise 0.7s ease both;
+}
+
+/* gradient accent line on top */
+.policy-page .policy-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--pp-accent), var(--pp-accent-2), transparent);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.policy-page .policy-content .policy-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--pp-border-hover);
+  box-shadow: 0 24px 60px -20px rgba(91, 140, 255, 0.35);
+}
+
+.policy-page .policy-content .policy-card:hover::before {
+  opacity: 1;
+}
+
+/* staggered entrance */
+.policy-page .policy-content > .policy-card:nth-of-type(2)  { animation-delay: 0.05s; }
+.policy-page .policy-content > .policy-card:nth-of-type(3)  { animation-delay: 0.1s; }
+.policy-page .policy-content > .policy-card:nth-of-type(4)  { animation-delay: 0.15s; }
+.policy-page .policy-content > .policy-card:nth-of-type(5)  { animation-delay: 0.2s; }
+.policy-page .policy-content > .policy-card:nth-of-type(6)  { animation-delay: 0.25s; }
+
+/* icon tile */
+.policy-page .policy-card > .faq-icon {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 1.25rem;
+  border-radius: 16px;
+  font-size: 1.25rem;
+  color: #fff;
+  background: var(--pp-grad);
+  box-shadow: 0 10px 28px -8px rgba(91, 140, 255, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 0.35s ease;
+}
+
+.policy-page .policy-content .policy-card:hover > .faq-icon {
+  transform: rotate(-6deg) scale(1.08);
+}
+
+.policy-page .policy-card h2 {
+  margin: 0 0 0.9rem;
+  font-size: 1.3rem;
+  line-height: 1.3;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #fff;
+  background: none;
+  -webkit-text-fill-color: #fff;
+}
+
+.policy-page .policy-card p {
+  margin: 0 0 0.75rem;
+  font-size: 0.97rem;
+  line-height: 1.8;
+  color: var(--pp-muted);
+}
+
+.policy-page .policy-card p:last-child {
+  margin-bottom: 0;
+}
+
+/* lists with gradient bullets */
+.policy-page .policy-card ul {
+  display: grid;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.policy-page .policy-card li {
+  position: relative;
+  padding-left: 1.7rem;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: #b4c0dc;
+}
+
+.policy-page .policy-card li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--pp-grad);
+  box-shadow: 0 0 0 4px rgba(91, 140, 255, 0.14);
+}
+
+/* on wide screens, split long lists into two columns */
+@media (min-width: 821px) {
+  .policy-page .policy-content > .policy-card ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ───────────── FAQ ───────────── */
+.policy-page .faq-card {
+  max-width: 1000px;
+  /* width: calc(100%); */
+  margin: 0 auto 5rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  background: linear-gradient(160deg, rgba(91, 140, 255, 0.09), rgba(139, 92, 246, 0.05) 60%, rgba(255, 255, 255, 0.02));
+  border-color: rgba(91, 140, 255, 0.22);
+}
+
+.policy-page .faq-card:hover {
+  transform: none;
+}
+
+.policy-page .faq-card > h2 {
+  margin-bottom: 2rem;
+  text-align: center;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  font-weight: 800;
+  background: var(--pp-grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.policy-page .faq-card > h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin: 0.9rem auto 0;
+  border-radius: 3px;
+  background: var(--pp-grad);
+}
+
+.policy-page .faq-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  max-width: 920px;
+  margin: 0 auto 1rem;
+  padding: 1.4rem 1.5rem;
+  border-radius: 18px;
+  background: rgba(8, 12, 30, 0.55);
+  border: 1px solid var(--pp-border);
+  transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.policy-page .faq-item:last-child {
+  margin-bottom: 0;
+}
+
+.policy-page .faq-item:hover {
+  transform: translateX(4px);
+  border-color: var(--pp-border-hover);
+  background: rgba(14, 22, 52, 0.7);
+}
+
+.policy-page .faq-item .faq-icon {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  font-size: 1.05rem;
+  color: #fff;
+  background: var(--pp-grad);
+  box-shadow: 0 8px 22px -8px rgba(91, 140, 255, 0.65);
+}
+
+.policy-page .faq-content h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1.08rem;
+  line-height: 1.4;
+  font-weight: 650;
+  color: #fff;
+}
+
+.policy-page .faq-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--pp-muted);
+}
+
+/* ───────────── RESPONSIVE ───────────── */
+@media (max-width: 820px) {
+  .policy-page .policy-content {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+    padding: 0.5rem 1rem 2rem;
+  }
+
+  .policy-page .policy-content > .policy-card:first-of-type,
+  .policy-page .policy-content > .policy-card:last-of-type {
+    grid-column: auto;
+  }
+
+  .policy-page .policy-card {
+    padding: 1.5rem 1.35rem;
+    border-radius: 18px;
+  }
+
+  .policy-page .faq-card {
+    width: calc(100% - 2rem);
+    margin-bottom: 3rem;
+  }
+
+  .policy-page .faq-item {
+    flex-direction: column;
+    gap: 0.9rem;
+    padding: 1.15rem;
+  }
+
+  .policy-page .faq-item:hover {
+    transform: none;
+  }
+}
+
+/* ───────────── MOTION + A11Y ───────────── */
+@keyframes pp-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .policy-page *,
+  .policy-page *::before,
+  .policy-page *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* ───────────── PRINT ───────────── */
+@media print {
+  .policy-page { background: #fff; color: #111; }
+  .policy-page::before, .policy-page .policy-hero::after { display: none; }
+  .policy-page .policy-hero h1,
+  .policy-page .faq-card > h2 { -webkit-text-fill-color: #111; color: #111; background: none; }
+  .policy-page .policy-card,
+  .policy-page .faq-item { background: #fff; border-color: #ccc; box-shadow: none; }
+  .policy-page .policy-card h2,
+  .policy-page .faq-content h3 { color: #111; -webkit-text-fill-color: #111; }
+  .policy-page .policy-card p,
+  .policy-page .policy-card li,
+  .policy-page .faq-content p,
+  .policy-page .policy-hero p { color: #333; }
+}

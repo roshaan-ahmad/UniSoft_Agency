@@ -15,7 +15,7 @@ import {
   formatDate,
   SERVICE_LINKS,
 } from "../utils";
-
+import "../blogs.css";
 // Pre-build every post and 404 anything else
 export const dynamicParams = false;
 export function generateStaticParams() {
