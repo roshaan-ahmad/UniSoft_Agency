@@ -58,7 +58,7 @@ export default function AboutPage() {
       <SeoSchema
         schema={breadcrumbSchema([
           { name: "Home", path: "/" },
-          { name: "About", path: "/about" },
+          { name: "About", path: "/about"},
         ])}
       />
       <AboutClient />
