@@ -138,7 +138,6 @@ function AboutClient() {
             )}
           </div>
         </motion.div>
-
         <div className="statsGrid">
           {[
             { value: "50+", label: "Projects Completed" },
