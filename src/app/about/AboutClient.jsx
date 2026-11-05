@@ -139,7 +139,6 @@ function AboutClient() {
           </div>
         </motion.div>
 
-        {/* STATS: TODO make these match the homepage/portfolio (they say 100+ projects, 50+ clients) */}
         <div className="statsGrid">
           {[
             { value: "50+", label: "Projects Completed" },
