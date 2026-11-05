@@ -1,11 +1,67 @@
+// app/services/seo-services/page.jsx
+// ─────────────────────────────────────────────────────────────────────────────
+// SEO FIXES APPLIED:
+// 1. Added keywords array
+// 2. Added openGraph.images with explicit dimensions
+// 3. Added twitter card metadata
+// 4. Added breadcrumbSchema rendered in JSX
+// 5. Added explicit robots directive
+// ─────────────────────────────────────────────────────────────────────────────
+
 import ServiceTemplate from "@/app/components/ServiceTemplate";
-import { seoSchema } from "@/app/lib/schema";
 import SeoSchema from "@/app/components/SeoSchema";
+import { seoSchema, breadcrumbSchema } from "@/app/lib/schema";
+
+const BASE = "https://unisoftpvt.com";
+const PAGE_URL = `${BASE}/services/seo-services`;
+const OG_IMAGE = `${BASE}/og-image.jpg`;
+const title = "SEO Services Agency | UniSoft";
+const description =
+  "Boost your Google rankings with UniSoft SEO services including technical SEO, local SEO, keyword research, and full optimization strategies.";
 
 export const metadata = {
-  title: "SEO Services Agency | UniSoft",
-  description: "Boost your Google rankings with UniSoft SEO services including technical SEO, local SEO, keyword research, and full optimization strategies.",
-  alternates: { canonical: "https://unisoftpvt.com/services/seo-services" },
+  title,
+  description,
+  keywords: [
+    "SEO agency",
+    "technical SEO services",
+    "local SEO optimization",
+    "keyword research services",
+    "link building agency",
+    "Google ranking services",
+    "on-page SEO optimization",
+    "SEO services Pakistan",
+    "search engine optimization company",
+    "Google penalty recovery",
+  ],
+  alternates: { canonical: PAGE_URL },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  openGraph: {
+    type: "website",
+    url: PAGE_URL,
+    title,
+    description,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "SEO Services Agency by UniSoft – Technical SEO, Local SEO & Link Building",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@unisoftpvt",
+    creator: "@unisoftpvt",
+    title,
+    description,
+    images: [OG_IMAGE],
+  },
 };
 
 const data = {
@@ -13,7 +69,8 @@ const data = {
   title: "Rank Higher on Google with Powerful SEO Strategies",
   shortTitle: "SEO Services",
   icon: "ri-line-chart-line",
-  intro: "We help businesses increase organic traffic, improve search rankings, and generate high-quality leads through advanced SEO optimization techniques proven to deliver measurable results.",
+  intro:
+    "We help businesses increase organic traffic, improve search rankings, and generate high-quality leads through advanced SEO optimization techniques proven to deliver measurable results.",
 
   benefits: [
     { icon: "ri-search-line", title: "Higher Google Rankings", desc: "Dominate search results for your target keywords and outrank competitors consistently." },
@@ -55,22 +112,19 @@ const data = {
 
   pricing: [
     {
-      name: "Starter SEO",
-      price: "$299/mo",
+      name: "Starter SEO", price: "$299/mo",
       desc: "For small businesses starting their SEO journey.",
       features: ["10 target keywords", "On-page optimization", "Monthly report", "Google Search Console setup", "Basic link building"],
       popular: false,
     },
     {
-      name: "Growth SEO",
-      price: "$699/mo",
+      name: "Growth SEO", price: "$699/mo",
       desc: "For businesses serious about dominating search results.",
       features: ["30 target keywords", "Technical SEO audit", "Content optimization", "Advanced link building", "Local SEO", "Bi-weekly reports"],
       popular: true,
     },
     {
-      name: "Enterprise SEO",
-      price: "$1,499/mo",
+      name: "Enterprise SEO", price: "$1,499/mo",
       desc: "Full-scale SEO for competitive industries.",
       features: ["Unlimited keywords", "Full technical SEO", "Content creation", "PR & digital outreach", "Competitor monitoring", "Weekly reports"],
       popular: false,
@@ -96,15 +150,13 @@ const data = {
 
   caseStudies: [
     {
-      industry: "E-Commerce",
-      client: "StyleHub Fashion",
+      industry: "E-Commerce", client: "StyleHub Fashion",
       challenge: "Website had 500 monthly visitors with zero page-1 rankings despite 3 years online.",
       solution: "Complete technical SEO overhaul, content strategy, and aggressive link building campaign.",
       results: [{ value: "400%", label: "Traffic Growth" }, { value: "47", label: "Page-1 Keywords" }, { value: "180%", label: "Revenue Increase" }],
     },
     {
-      industry: "Local Business",
-      client: "ProDent Clinic",
+      industry: "Local Business", client: "ProDent Clinic",
       challenge: "New clinic struggling to appear in local Google searches against established competitors.",
       solution: "Local SEO strategy with GMB optimization, local citations, and review management.",
       results: [{ value: "#1", label: "Local Ranking" }, { value: "3x", label: "New Patients" }, { value: "200%", label: "Call Volume" }],
@@ -130,6 +182,13 @@ export default function Page() {
   return (
     <>
       <SeoSchema schema={seoSchema} />
+      <SeoSchema
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "SEO Services", path: "/services/seo-services" },
+        ])}
+      />
       <ServiceTemplate data={data} />
     </>
   );

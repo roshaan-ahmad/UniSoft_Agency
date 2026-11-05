@@ -1,11 +1,67 @@
+// app/services/software-development/page.jsx
+// ─────────────────────────────────────────────────────────────────────────────
+// SEO FIXES APPLIED:
+// 1. Added keywords array
+// 2. Added openGraph.images with explicit dimensions
+// 3. Added twitter card metadata
+// 4. Added breadcrumbSchema rendered in JSX
+// 5. Added explicit robots directive
+// ─────────────────────────────────────────────────────────────────────────────
+
 import ServiceTemplate from "@/app/components/ServiceTemplate";
-import { softwareSchema } from "@/app/lib/schema";
 import SeoSchema from "@/app/components/SeoSchema";
+import { softwareSchema, breadcrumbSchema } from "@/app/lib/schema";
+
+const BASE = "https://unisoftpvt.com";
+const PAGE_URL = `${BASE}/services/software-development`;
+const OG_IMAGE = `${BASE}/og-image.jpg`;
+const title = "Custom Software Development Services | UniSoft";
+const description =
+  "Professional software development services by UniSoft including SaaS applications, enterprise systems, APIs, automation solutions, and scalable business software.";
 
 export const metadata = {
-  title: "Custom Software Development Services | UniSoft",
-  description: "Professional software development services by UniSoft including SaaS applications, enterprise systems, APIs, automation solutions, and scalable business software.",
-  alternates: { canonical: "https://unisoftpvt.com/services/software-development" },
+  title,
+  description,
+  keywords: [
+    "custom software development",
+    "SaaS development company",
+    "enterprise software solutions",
+    "API development services",
+    "MERN stack development",
+    "Next.js development company",
+    "software development agency Pakistan",
+    "cloud-native application development",
+    "scalable software architecture",
+    "React Node.js developers",
+  ],
+  alternates: { canonical: PAGE_URL },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  openGraph: {
+    type: "website",
+    url: PAGE_URL,
+    title,
+    description,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Custom Software Development Services by UniSoft – SaaS, APIs & Enterprise Solutions",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@unisoftpvt",
+    creator: "@unisoftpvt",
+    title,
+    description,
+    images: [OG_IMAGE],
+  },
 };
 
 const data = {
@@ -13,7 +69,8 @@ const data = {
   title: "Custom Software Development Solutions for Modern Businesses",
   shortTitle: "Software Development",
   icon: "ri-code-s-slash-line",
-  intro: "UniSoft builds powerful, scalable, and secure software solutions designed to streamline operations, automate workflows, and accelerate business growth in the digital era.",
+  intro:
+    "UniSoft builds powerful, scalable, and secure software solutions designed to streamline operations, automate workflows, and accelerate business growth in the digital era.",
 
   benefits: [
     { icon: "ri-rocket-line", title: "Faster Time to Market", desc: "Agile development process ensures your product launches quickly without compromising quality." },
@@ -57,22 +114,19 @@ const data = {
 
   pricing: [
     {
-      name: "Starter",
-      price: "$999",
+      name: "Starter", price: "$999",
       desc: "Perfect for small businesses and MVPs.",
       features: ["Up to 5 screens", "Basic authentication", "REST API", "MongoDB database", "1 month support"],
       popular: false,
     },
     {
-      name: "Business",
-      price: "$2,999",
+      name: "Business", price: "$2,999",
       desc: "Ideal for growing businesses needing full-featured software.",
       features: ["Unlimited screens", "Advanced auth & roles", "Payment integration", "Admin dashboard", "Cloud deployment", "3 months support"],
       popular: true,
     },
     {
-      name: "Enterprise",
-      price: "Custom",
+      name: "Enterprise", price: "Custom",
       desc: "Full-scale enterprise solutions with dedicated team.",
       features: ["Custom architecture", "AI/ML integration", "Multi-tenant SaaS", "DevOps setup", "SLA guarantee", "12 months support"],
       popular: false,
@@ -98,15 +152,13 @@ const data = {
 
   caseStudies: [
     {
-      industry: "E-Commerce",
-      client: "ShopEase UK",
+      industry: "E-Commerce", client: "ShopEase UK",
       challenge: "Legacy system couldn't handle 10,000+ daily orders causing frequent crashes.",
       solution: "Rebuilt entire platform with microservices architecture and auto-scaling on AWS.",
       results: [{ value: "300%", label: "Performance Boost" }, { value: "99.9%", label: "Uptime" }, { value: "2x", label: "Revenue Growth" }],
     },
     {
-      industry: "Healthcare",
-      client: "MediTrack USA",
+      industry: "Healthcare", client: "MediTrack USA",
       challenge: "Manual patient record management causing errors and compliance issues.",
       solution: "Built HIPAA-compliant digital records system with role-based access control.",
       results: [{ value: "80%", label: "Error Reduction" }, { value: "5x", label: "Faster Records" }, { value: "100%", label: "Compliance" }],
@@ -132,6 +184,13 @@ export default function Page() {
   return (
     <>
       <SeoSchema schema={softwareSchema} />
+      <SeoSchema
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Software Development", path: "/services/software-development" },
+        ])}
+      />
       <ServiceTemplate data={data} />
     </>
   );

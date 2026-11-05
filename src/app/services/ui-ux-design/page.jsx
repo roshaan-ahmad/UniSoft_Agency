@@ -1,11 +1,67 @@
+// app/services/ui-ux-design/page.jsx
+// ─────────────────────────────────────────────────────────────────────────────
+// SEO FIXES APPLIED:
+// 1. Added keywords array
+// 2. Added openGraph.images with explicit dimensions
+// 3. Added twitter card metadata
+// 4. Added breadcrumbSchema rendered in JSX
+// 5. Added explicit robots directive
+// ─────────────────────────────────────────────────────────────────────────────
+
 import ServiceTemplate from "@/app/components/ServiceTemplate";
-import { uiuxSchema } from "@/app/lib/schema";
 import SeoSchema from "@/app/components/SeoSchema";
+import { uiuxSchema, breadcrumbSchema } from "@/app/lib/schema";
+
+const BASE = "https://unisoftpvt.com";
+const PAGE_URL = `${BASE}/services/ui-ux-design`;
+const OG_IMAGE = `${BASE}/og-image.jpg`;
+const title = "UI UX Design Services | UniSoft";
+const description =
+  "Modern UI UX design services by UniSoft including web design, mobile app design, UX research, wireframing, and conversion-focused interfaces.";
 
 export const metadata = {
-  title: "UI UX Design Services | UniSoft",
-  description: "Modern UI UX design services by UniSoft including web design, mobile app design, UX research, wireframing, and conversion-focused interfaces.",
-  alternates: { canonical: "https://unisoftpvt.com/services/ui-ux-design" },
+  title,
+  description,
+  keywords: [
+    "UI UX design agency",
+    "user interface design services",
+    "user experience design",
+    "Figma design services",
+    "mobile app UI design",
+    "web design company",
+    "wireframing and prototyping",
+    "design system creation",
+    "conversion-focused design",
+    "UI UX design Pakistan",
+  ],
+  alternates: { canonical: PAGE_URL },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  openGraph: {
+    type: "website",
+    url: PAGE_URL,
+    title,
+    description,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "UI UX Design Services by UniSoft – Web & Mobile App Design",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@unisoftpvt",
+    creator: "@unisoftpvt",
+    title,
+    description,
+    images: [OG_IMAGE],
+  },
 };
 
 const data = {
@@ -13,7 +69,8 @@ const data = {
   title: "Modern UI/UX Design That Converts Visitors Into Customers",
   shortTitle: "UI/UX Design",
   icon: "ri-palette-line",
-  intro: "We design clean, modern, and conversion-focused user experiences that improve engagement, increase usability, and drive business growth through beautiful and intuitive interfaces.",
+  intro:
+    "We design clean, modern, and conversion-focused user experiences that improve engagement, increase usability, and drive business growth through beautiful and intuitive interfaces.",
 
   benefits: [
     { icon: "ri-user-smile-line", title: "Better User Experience", desc: "Intuitive designs that users love, reducing friction and increasing satisfaction." },
@@ -55,22 +112,19 @@ const data = {
 
   pricing: [
     {
-      name: "Landing Page",
-      price: "$299",
+      name: "Landing Page", price: "$299",
       desc: "Single page design for campaigns and launches.",
       features: ["1 page design", "Mobile responsive", "2 revisions", "Figma file", "48hr delivery"],
       popular: false,
     },
     {
-      name: "Website Design",
-      price: "$999",
+      name: "Website Design", price: "$999",
       desc: "Complete website UI/UX design package.",
       features: ["Up to 10 pages", "Design system", "Mobile + desktop", "5 revisions", "Dev handoff", "Prototype"],
       popular: true,
     },
     {
-      name: "App Design",
-      price: "$1,999",
+      name: "App Design", price: "$1,999",
       desc: "Full mobile or web app UI/UX design.",
       features: ["Full app screens", "Component library", "User flows", "Usability testing", "Unlimited revisions", "Dev specs"],
       popular: false,
@@ -96,15 +150,13 @@ const data = {
 
   caseStudies: [
     {
-      industry: "SaaS",
-      client: "AnalyticsPro",
+      industry: "SaaS", client: "AnalyticsPro",
       challenge: "Complex dashboard with 40% user drop-off rate due to confusing navigation and information overload.",
       solution: "Complete UX audit, user interviews, and redesign with simplified navigation and progressive disclosure.",
       results: [{ value: "70%", label: "Less Drop-off" }, { value: "3x", label: "Daily Active Users" }, { value: "4.9★", label: "User Rating" }],
     },
     {
-      industry: "E-Commerce",
-      client: "LuxeStore",
+      industry: "E-Commerce", client: "LuxeStore",
       challenge: "Beautiful products but only 1.2% conversion rate due to poor checkout UX and trust signals.",
       solution: "Redesigned product pages, checkout flow, and added social proof elements based on user research.",
       results: [{ value: "4.8%", label: "Conversion Rate" }, { value: "300%", label: "Revenue Growth" }, { value: "55%", label: "Cart Abandonment Drop" }],
@@ -130,6 +182,13 @@ export default function Page() {
   return (
     <>
       <SeoSchema schema={uiuxSchema} />
+      <SeoSchema
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "UI/UX Design", path: "/services/ui-ux-design" },
+        ])}
+      />
       <ServiceTemplate data={data} />
     </>
   );

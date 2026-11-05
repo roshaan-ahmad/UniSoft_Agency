@@ -1,11 +1,67 @@
+// app/services/web-development/page.jsx
+// ─────────────────────────────────────────────────────────────────────────────
+// SEO FIXES APPLIED:
+// 1. Added keywords array
+// 2. Added openGraph.images with explicit dimensions
+// 3. Added twitter card metadata
+// 4. Added breadcrumbSchema rendered in JSX
+// 5. Added explicit robots directive
+// ─────────────────────────────────────────────────────────────────────────────
+
 import ServiceTemplate from "@/app/components/ServiceTemplate";
-import { webDevelopmentSchema } from "@/app/lib/schema";
 import SeoSchema from "@/app/components/SeoSchema";
+import { webDevelopmentSchema, breadcrumbSchema } from "@/app/lib/schema";
+
+const BASE = "https://unisoftpvt.com";
+const PAGE_URL = `${BASE}/services/web-development`;
+const OG_IMAGE = `${BASE}/og-image.jpg`;
+const title = "Web Development Services | UniSoft";
+const description =
+  "Professional web development services by UniSoft. We build fast, responsive, SEO-optimized websites and web applications using React, Next.js, and modern technologies.";
 
 export const metadata = {
-  title: "Web Development Services | UniSoft",
-  description: "Professional web development services by UniSoft. We build fast, responsive, SEO-optimized websites and web applications using React, Next.js, and modern technologies.",
-  alternates: { canonical: "https://unisoftpvt.com/services/web-development" },
+  title,
+  description,
+  keywords: [
+    "web development company",
+    "Next.js web development",
+    "React website development",
+    "e-commerce website development",
+    "responsive web design",
+    "SEO-optimized websites",
+    "web development agency Pakistan",
+    "custom website development",
+    "CMS website development",
+    "fast website development",
+  ],
+  alternates: { canonical: PAGE_URL },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  openGraph: {
+    type: "website",
+    url: PAGE_URL,
+    title,
+    description,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Web Development Services by UniSoft – React, Next.js & E-Commerce",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@unisoftpvt",
+    creator: "@unisoftpvt",
+    title,
+    description,
+    images: [OG_IMAGE],
+  },
 };
 
 const data = {
@@ -13,7 +69,8 @@ const data = {
   title: "High-Performance Websites & Web Apps Built to Convert",
   shortTitle: "Web Development",
   icon: "ri-global-line",
-  intro: "We design and develop blazing-fast, SEO-optimized, and visually stunning websites that not only look great but drive real business results through superior user experience.",
+  intro:
+    "We design and develop blazing-fast, SEO-optimized, and visually stunning websites that not only look great but drive real business results through superior user experience.",
 
   benefits: [
     { icon: "ri-speed-line", title: "Lightning Fast Speed", desc: "Optimized for Core Web Vitals with sub-2-second load times for maximum SEO and UX." },
@@ -55,22 +112,19 @@ const data = {
 
   pricing: [
     {
-      name: "Landing Page",
-      price: "$499",
+      name: "Landing Page", price: "$499",
       desc: "Perfect for startups and product launches.",
       features: ["1-5 pages", "Mobile responsive", "SEO optimized", "Contact form", "1 month support"],
       popular: false,
     },
     {
-      name: "Business Website",
-      price: "$1,499",
+      name: "Business Website", price: "$1,499",
       desc: "Complete website for established businesses.",
       features: ["Up to 15 pages", "CMS integration", "Blog setup", "Analytics", "Speed optimization", "3 months support"],
       popular: true,
     },
     {
-      name: "E-Commerce",
-      price: "$2,999",
+      name: "E-Commerce", price: "$2,999",
       desc: "Full online store with payment processing.",
       features: ["Unlimited products", "Payment gateway", "Inventory management", "Order tracking", "Admin dashboard", "6 months support"],
       popular: false,
@@ -96,15 +150,13 @@ const data = {
 
   caseStudies: [
     {
-      industry: "E-Commerce",
-      client: "LuxeStyle Fashion",
+      industry: "E-Commerce", client: "LuxeStyle Fashion",
       challenge: "Old WordPress site was slow (8s load time) and losing customers to competitors.",
       solution: "Rebuilt with Next.js, optimized images, and implemented CDN for global performance.",
       results: [{ value: "0.8s", label: "Load Time" }, { value: "65%", label: "Bounce Rate Drop" }, { value: "220%", label: "Conversions" }],
     },
     {
-      industry: "Professional Services",
-      client: "ProLegal Law Firm",
+      industry: "Professional Services", client: "ProLegal Law Firm",
       challenge: "No online presence and losing potential clients to competitors with modern websites.",
       solution: "Built professional website with SEO, appointment booking, and client portal.",
       results: [{ value: "150%", label: "More Inquiries" }, { value: "#1", label: "Local Ranking" }, { value: "40%", label: "Cost Savings" }],
@@ -130,6 +182,13 @@ export default function Page() {
   return (
     <>
       <SeoSchema schema={webDevelopmentSchema} />
+      <SeoSchema
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Web Development", path: "/services/web-development" },
+        ])}
+      />
       <ServiceTemplate data={data} />
     </>
   );

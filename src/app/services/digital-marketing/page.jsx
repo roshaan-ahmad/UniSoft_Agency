@@ -1,11 +1,67 @@
+// app/services/digital-marketing/page.jsx
+// ─────────────────────────────────────────────────────────────────────────────
+// SEO FIXES APPLIED:
+// 1. Added keywords array
+// 2. Added openGraph.images with explicit dimensions
+// 3. Added twitter card metadata
+// 4. Added breadcrumbSchema rendered in JSX
+// 5. Added explicit robots directive
+// ─────────────────────────────────────────────────────────────────────────────
+
 import ServiceTemplate from "@/app/components/ServiceTemplate";
-import { digitalMarketingSchema } from "@/app/lib/schema";
 import SeoSchema from "@/app/components/SeoSchema";
+import { digitalMarketingSchema, breadcrumbSchema } from "@/app/lib/schema";
+
+const BASE = "https://unisoftpvt.com";
+const PAGE_URL = `${BASE}/services/digital-marketing`;
+const OG_IMAGE = `${BASE}/og-image.jpg`;
+const title = "Digital Marketing Services | UniSoft";
+const description =
+  "Grow your business with UniSoft digital marketing services including Google Ads, Meta Ads, social media marketing, and lead generation strategies.";
 
 export const metadata = {
-  title: "Digital Marketing Services | UniSoft",
-  description: "Grow your business with UniSoft digital marketing services including Google Ads, Meta Ads, social media marketing, and lead generation strategies.",
-  alternates: { canonical: "https://unisoftpvt.com/services/digital-marketing" },
+  title,
+  description,
+  keywords: [
+    "digital marketing agency",
+    "Google Ads management",
+    "Meta Ads agency",
+    "Facebook ads management",
+    "social media marketing",
+    "lead generation services",
+    "paid advertising agency",
+    "Instagram marketing services",
+    "PPC management agency",
+    "digital marketing Pakistan",
+  ],
+  alternates: { canonical: PAGE_URL },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  openGraph: {
+    type: "website",
+    url: PAGE_URL,
+    title,
+    description,
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Digital Marketing Services by UniSoft – Google Ads, Meta Ads & Lead Generation",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    site: "@unisoftpvt",
+    creator: "@unisoftpvt",
+    title,
+    description,
+    images: [OG_IMAGE],
+  },
 };
 
 const data = {
@@ -13,7 +69,8 @@ const data = {
   title: "High-Performance Digital Marketing & Lead Generation",
   shortTitle: "Digital Marketing",
   icon: "ri-megaphone-line",
-  intro: "We help businesses grow online using powerful marketing strategies, paid ads, SEO, branding, and conversion optimization systems that bring real customers — not just traffic.",
+  intro:
+    "We help businesses grow online using powerful marketing strategies, paid ads, SEO, branding, and conversion optimization systems that bring real customers — not just traffic.",
 
   benefits: [
     { icon: "ri-user-add-line", title: "More Qualified Leads", desc: "Targeted campaigns that attract buyers ready to convert, not just random visitors." },
@@ -55,22 +112,19 @@ const data = {
 
   pricing: [
     {
-      name: "Starter",
-      price: "$499/mo",
+      name: "Starter", price: "$499/mo",
       desc: "For small businesses starting digital marketing.",
       features: ["Google Ads setup", "Facebook Ads", "Monthly report", "Ad spend up to $1k", "2 campaigns"],
       popular: false,
     },
     {
-      name: "Growth",
-      price: "$999/mo",
+      name: "Growth", price: "$999/mo",
       desc: "For businesses ready to scale their marketing.",
       features: ["Google + Meta Ads", "Social media management", "Email marketing", "Ad spend up to $5k", "Weekly reports", "CRO included"],
       popular: true,
     },
     {
-      name: "Enterprise",
-      price: "$2,499/mo",
+      name: "Enterprise", price: "$2,499/mo",
       desc: "Full-scale marketing for aggressive growth.",
       features: ["All platforms", "Content creation", "Influencer outreach", "Unlimited ad spend", "Dedicated manager", "Daily reports"],
       popular: false,
@@ -96,15 +150,13 @@ const data = {
 
   caseStudies: [
     {
-      industry: "E-Commerce",
-      client: "StyleBoutique Fashion",
+      industry: "E-Commerce", client: "StyleBoutique Fashion",
       challenge: "Spending $5,000/month on ads with only 1.5x ROAS and declining sales.",
       solution: "Rebuilt entire Meta Ads strategy with new creatives, audience segmentation, and retargeting funnels.",
       results: [{ value: "8x", label: "ROAS" }, { value: "300%", label: "Revenue Growth" }, { value: "60%", label: "Cost Per Sale Drop" }],
     },
     {
-      industry: "Local Business",
-      client: "FitLife Gym",
+      industry: "Local Business", client: "FitLife Gym",
       challenge: "New gym with zero online presence competing against established chains.",
       solution: "Hyper-local Google Ads and Facebook campaigns targeting fitness enthusiasts within 5km radius.",
       results: [{ value: "500%", label: "New Members" }, { value: "$2", label: "Cost Per Lead" }, { value: "12x", label: "Ad ROI" }],
@@ -130,6 +182,13 @@ export default function Page() {
   return (
     <>
       <SeoSchema schema={digitalMarketingSchema} />
+      <SeoSchema
+        schema={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Services", path: "/services" },
+          { name: "Digital Marketing", path: "/services/digital-marketing" },
+        ])}
+      />
       <ServiceTemplate data={data} />
     </>
   );
