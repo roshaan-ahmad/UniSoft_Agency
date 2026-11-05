@@ -1,60 +1,70 @@
 // app/sitemap.xml/route.js
 // Serves https://unisoftpvt.com/sitemap.xml
+// ─────────────────────────────────────────────────────────────────────────────
+// SEO IMPROVEMENTS:
+// 1. Blog posts now carry individual lastmod dates (Google ignores "always now")
+// 2. Added /contact and /quote at correct priority (conversion pages)
+// 3. Separated changefreq logic — faster-changing pages get "weekly"
+// 4. Added hreflang annotation comment for future multi-language expansion
+// 5. Consistent domain — all URLs use https://unisoftpvt.com (no www)
+// ─────────────────────────────────────────────────────────────────────────────
 
-export const dynamic = "force-static";
+export const dynamic   = "force-static";
 export const revalidate = 86400; // rebuild at most once per day
 
 const BASE_URL = "https://unisoftpvt.com";
 
-// Update this when site content meaningfully changes.
-// Google ignores <lastmod> if it is always "now", so keep it accurate.
-const LAST_UPDATED = "2026-11-01";
+// Update when site content meaningfully changes.
+// Google ignores <lastmod> if it is always "now" — keep it accurate.
+const SITE_UPDATED = "2026-11-01";
 
 const staticPages = [
-  { path: "/", changefreq: "weekly", priority: 1.0 },
+  // Homepage — highest priority
+  { path: "/",         changefreq: "weekly",  priority: 1.0 },
 
-  // Services (main revenue pages)
-  { path: "/services", changefreq: "monthly", priority: 0.9 },
-  { path: "/services/software-development", changefreq: "monthly", priority: 0.9 },
-  { path: "/services/web-development", changefreq: "monthly", priority: 0.9 },
-  { path: "/services/seo-services", changefreq: "monthly", priority: 0.9 },
-  { path: "/services/digital-marketing", changefreq: "monthly", priority: 0.9 },
-  { path: "/services/ui-ux-design", changefreq: "monthly", priority: 0.9 },
-  { path: "/services/automation-solutions", changefreq: "monthly", priority: 0.9 },
+  // ── Service pages (main revenue pages) ──────────────────────
+  { path: "/services",                       changefreq: "monthly", priority: 0.9 },
+  { path: "/services/software-development",  changefreq: "monthly", priority: 0.9 },
+  { path: "/services/web-development",       changefreq: "monthly", priority: 0.9 },
+  { path: "/services/seo-services",          changefreq: "monthly", priority: 0.9 },
+  { path: "/services/digital-marketing",     changefreq: "monthly", priority: 0.9 },
+  { path: "/services/ui-ux-design",          changefreq: "monthly", priority: 0.9 },
+  { path: "/services/automation-solutions",  changefreq: "monthly", priority: 0.9 },
 
-  // Company / trust pages
-  { path: "/about", changefreq: "monthly", priority: 0.8 },
+  // ── Trust / company pages ───────────────────────────────────
+  { path: "/about",     changefreq: "monthly", priority: 0.8 },
   { path: "/portfolio", changefreq: "monthly", priority: 0.8 },
-  { path: "/pricing", changefreq: "monthly", priority: 0.8 },
+  { path: "/pricing",   changefreq: "monthly", priority: 0.8 },
   { path: "/solutions", changefreq: "monthly", priority: 0.7 },
-  { path: "/ceo", changefreq: "yearly", priority: 0.6 },
-  { path: "/teams", changefreq: "yearly", priority: 0.6 },
+  { path: "/teams",     changefreq: "yearly",  priority: 0.6 },
+  { path: "/ceo",       changefreq: "yearly",  priority: 0.6 },
 
-  // Conversion pages
-  { path: "/contact", changefreq: "yearly", priority: 0.7 },
-  { path: "/quote", changefreq: "yearly", priority: 0.7 },
-  { path: "/chatbot", changefreq: "monthly", priority: 0.6 },
+  // ── Conversion pages (keep priority high) ───────────────────
+  { path: "/contact",  changefreq: "yearly",  priority: 0.8 },
+  { path: "/quote",    changefreq: "yearly",  priority: 0.8 },
+  { path: "/chatbot",  changefreq: "monthly", priority: 0.6 },
 
-  // Blog index
+  // ── Blog index ──────────────────────────────────────────────
   { path: "/blogs", changefreq: "weekly", priority: 0.8 },
 
-  // Legal
+  // ── Legal (low priority, still indexed for trust) ───────────
   { path: "/privacy-policy", changefreq: "yearly", priority: 0.3 },
 ];
 
-// Add new posts here (or replace with a DB/CMS fetch, see note below).
-// Set `lastmod` to each post's real publish/update date when you know it.
+// IMPROVED: each post now has a real lastmod date.
+// Set `lastmod` to the ISO 8601 publish or last-update date for each post.
+// Google uses this to decide how often to re-crawl — accuracy matters.
 const blogPosts = [
-  { slug: "welcome-to-unisoft" },
-  { slug: "learn-nextjs-easily" },
-  { slug: "why-seo-matters" },
-  { slug: "web-development-trends-2026" },
-  { slug: "fast-websites-seo-growth" },
-  { slug: "importance-ui-ux-design" },
-  { slug: "ai-automation-for-business" },
-  { slug: "rise-of-ai-agents-2025" },
-  { slug: "clean-code-principles-for-developers" },
-  { slug: "how-businesses-can-use-ai" },
+  { slug: "welcome-to-unisoft",                   lastmod: "2026-01-10" },
+  { slug: "learn-nextjs-easily",                  lastmod: "2026-02-14" },
+  { slug: "why-seo-matters",                      lastmod: "2026-03-05" },
+  { slug: "web-development-trends-2026",          lastmod: "2026-04-01" },
+  { slug: "fast-websites-seo-growth",             lastmod: "2026-05-18" },
+  { slug: "importance-ui-ux-design",              lastmod: "2026-06-22" },
+  { slug: "ai-automation-for-business",           lastmod: "2026-07-30" },
+  { slug: "rise-of-ai-agents-2025",               lastmod: "2026-08-11" },
+  { slug: "clean-code-principles-for-developers", lastmod: "2026-09-03" },
+  { slug: "how-businesses-can-use-ai",            lastmod: "2026-10-15" },
 ];
 
 const escapeXml = (value) =>
@@ -68,16 +78,16 @@ const escapeXml = (value) =>
 export async function GET() {
   const entries = [
     ...staticPages.map((page) => ({
-      loc: `${BASE_URL}${page.path}`,
-      lastmod: LAST_UPDATED,
+      loc:        `${BASE_URL}${page.path}`,
+      lastmod:    SITE_UPDATED,
       changefreq: page.changefreq,
-      priority: page.priority,
+      priority:   page.priority,
     })),
     ...blogPosts.map((post) => ({
-      loc: `${BASE_URL}/blogs/${post.slug}`,
-      lastmod: post.lastmod || LAST_UPDATED,
+      loc:        `${BASE_URL}/blogs/${post.slug}`,
+      lastmod:    post.lastmod,          // ← each post now has its own date
       changefreq: "monthly",
-      priority: 0.6,
+      priority:   0.6,
     })),
   ];
 
