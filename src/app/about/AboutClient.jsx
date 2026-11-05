@@ -120,7 +120,6 @@ function AboutClient() {
           </motion.div>
         </div>
 
-        {/* TECHNOLOGIES */}
         <motion.div
           className="techStack"
           initial="hidden"
