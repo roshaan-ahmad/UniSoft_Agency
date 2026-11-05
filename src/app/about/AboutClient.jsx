@@ -160,8 +160,6 @@ function AboutClient() {
             </motion.div>
           ))}
         </div>
-
-        {/* CTA */}
         <motion.div
           className="aboutCTA"
           initial="hidden"
