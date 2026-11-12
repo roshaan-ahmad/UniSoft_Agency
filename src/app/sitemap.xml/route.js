@@ -34,7 +34,7 @@ const staticPages = [
   { path: "/chatbot",  changefreq: "monthly", priority: 0.6 },
 
   // ── Blog index ──────────────────────────────────────────────
-  { path: "/blogs", changefreq: "weekly", priority: 0.8 },
+  // { path: "/blogs", changefreq: "weekly", priority: 0.8 },
 
   // ── Legal (low priority, still indexed for trust) ───────────
   { path: "/privacy-policy", changefreq: "yearly", priority: 0.3 },
