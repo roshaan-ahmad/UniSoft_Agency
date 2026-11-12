@@ -26,10 +26,10 @@ const staticPages = [
   { path: "/services",                       changefreq: "monthly", priority: 0.9 },
   { path: "/services/software-development",  changefreq: "monthly", priority: 0.9 },
   { path: "/services/web-development",       changefreq: "monthly", priority: 0.9 },
-  { path: "/services/seo-services",          changefreq: "monthly", priority: 0.9 },
+  { path: "/services/seo",          changefreq: "monthly", priority: 0.9 },
   { path: "/services/digital-marketing",     changefreq: "monthly", priority: 0.9 },
   { path: "/services/ui-ux-design",          changefreq: "monthly", priority: 0.9 },
-  { path: "/services/automation-solutions",  changefreq: "monthly", priority: 0.9 },
+  { path: "/services/automation",  changefreq: "monthly", priority: 0.9 },
 
   // ── Trust / company pages ───────────────────────────────────
   { path: "/about",     changefreq: "monthly", priority: 0.8 },
