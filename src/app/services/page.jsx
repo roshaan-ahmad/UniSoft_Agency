@@ -55,7 +55,7 @@ const services = [
   },
   {
     title: "SEO Services",
-    href: "/services/seo-services",
+    href: "/services/seo",
     desc: "Rank higher on Google with advanced technical and local SEO strategies.",
     icon: "ri-line-chart-line",
   },
@@ -79,7 +79,7 @@ const services = [
   },
   {
     title: "Automation Solutions",
-    href: "/services/automation-solutions",
+    href: "/services/automation",
     desc: "AI-powered workflows and business automation systems.",
     icon: "ri-cpu-line",
   },
