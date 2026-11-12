@@ -56,9 +56,9 @@ export function formatDate(iso) {
 // Category -> the service page each post should link to (internal linking)
 export const SERVICE_LINKS = {
   "Web Development": { href: "/services/web-development", label: "web development services" },
-  SEO: { href: "/services/seo-services", label: "SEO services" },
+  SEO: { href: "/services/seo", label: "SEO services" },
   "UI/UX Design": { href: "/services/ui-ux-design", label: "UI/UX design services" },
-  "AI & Automation": { href: "/services/automation-solutions", label: "AI automation solutions" },
+  "AI & Automation": { href: "/services/automation", label: "AI automation solutions" },
   "Software Development": { href: "/services/software-development", label: "software development services" },
   Company: { href: "/services", label: "services" },
 };
