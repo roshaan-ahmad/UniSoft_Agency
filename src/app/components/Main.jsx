@@ -223,17 +223,43 @@ const Main = () => {
               </div>
               <h1 className="mainH1">
                 Transforming Businesses Through{" "}
-                <span className="mainGrad">
-                  {/* preRenderFirstString puts the first phrase in the server HTML,
-                      so Google sees a real H1 instead of "Transforming Businesses Through" */}
+
+                {/* 
+    SEO FIX 1: Visually hidden span — crawlers index ALL keywords,
+    not just the first. aria-hidden keeps screen readers from double-reading.
+    Use Tailwind's sr-only or the CSS below.
+  */}
+                <span className="sr-only">
+                  Custom Software Development, Web Development, SEO & Digital Marketing,
+                  Business Automation, AI & Machine Learning, Mobile App Development,
+                  Cloud Solutions, E-Commerce Development, UI/UX Design
+                </span>
+
+                {/* 
+    SEO FIX 2: aria-hidden on the animation — screen readers read the
+    sr-only span above instead of watching letters type out one by one.
+    preRenderFirstString still injects phrase #1 into server HTML.
+  */}
+                <span className="mainGrad" aria-hidden="true">
                   <TypeAnimation
-                    sequence={["Custom Software Development", 2000, "Web Development", 2000, "SEO & Digital Marketing", 2000, "Business Automation", 2000]}
+                    sequence={[
+                      "Custom Software Development", 2000,
+                      "Web Development", 2000,
+                      "SEO & Digital Marketing", 2000,
+                      "Business Automation", 2000,
+                      "AI & Machine Learning", 2000,
+                      "Mobile App Development", 2000,
+                      "Cloud Solutions", 2000,
+                      "E-Commerce Development", 2000,
+                      "UI/UX Design", 2000,
+                    ]}
                     speed={50}
                     repeat={Infinity}
                     preRenderFirstString={true}
                   />
                 </span>
               </h1>
+
               <p className="mainDesc">
                 UniSoft helps startups and businesses build custom software, websites, AI automation
                 systems, and digital marketing solutions that accelerate growth and increase revenue.

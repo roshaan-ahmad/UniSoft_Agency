@@ -13,7 +13,18 @@
   color: white;
   scroll-behavior: smooth;
 }
-
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+  font-size: 12px;
+}
 .hamBurger {
   display: none;
 }
@@ -6436,7 +6447,7 @@ fo {
   display: flex;
   justify-content: center;
   align-items: center;
-  top: -10rem;
+  top: -3rem;
 }
 
 .mainImgCard {
@@ -8074,7 +8085,7 @@ fo {
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: 120px 24px 60px;
+  padding: 40px 24px 60px;
   background: radial-gradient(circle at 75% 20%, rgba(99, 102, 241, 0.18) 0%, transparent 55%);
 }
 
@@ -8125,7 +8136,7 @@ fo {
 
 @media (max-width: 768px) {
   .mainHero {
-    padding: 100px 16px 50px;
+    padding: 60px 16px 50px;
   }
 
   .mainH1 {
@@ -8153,7 +8164,7 @@ fo {
 
 @media (max-width: 480px) {
   .mainHero {
-    padding: 90px 14px 40px;
+    padding: 50px 14px 40px;
   }
 
   .mainBtns {
