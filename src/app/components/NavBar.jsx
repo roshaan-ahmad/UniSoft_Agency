@@ -7,10 +7,10 @@ import "../styles.css"
 const services = [
   { name: "Software Development", href: "/services/software-development", icon: "ri-code-s-slash-line" },
   { name: "Web Development", href: "/services/web-development", icon: "ri-global-line" },
-  { name: "SEO Services", href: "/services/seo-services", icon: "ri-line-chart-line" },
+  { name: "SEO Services", href: "/services/seo", icon: "ri-line-chart-line" },
   { name: "Digital Marketing", href: "/services/digital-marketing", icon: "ri-megaphone-line" },
   { name: "UI/UX Design", href: "/services/ui-ux-design", icon: "ri-palette-line" },
-  { name: "Automation Solutions", href: "/services/automation-solutions", icon: "ri-cpu-line" },
+  { name: "Automation Solutions", href: "/services/automation", icon: "ri-cpu-line" },
 ]
 
 const NavBar = () => {

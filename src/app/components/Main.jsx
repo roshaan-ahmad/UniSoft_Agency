@@ -109,7 +109,7 @@ const servicesData = [
     desc: "Automate workflows and boost productivity with smart, intelligent automation solutions.",
     readMore: "We integrate AI-powered bots, workflow automation, and smart pipelines that save time and reduce operational costs.",
     color: "#a855f7",
-    link: "/services/automation-solutions",
+    link: "/services/automation",
   },
   {
     id: 4,
