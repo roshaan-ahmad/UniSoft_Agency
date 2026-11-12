@@ -1,14 +1,3 @@
-// app/sitemap.xml/route.js
-// Serves https://unisoftpvt.com/sitemap.xml
-// ─────────────────────────────────────────────────────────────────────────────
-// SEO IMPROVEMENTS:
-// 1. Blog posts now carry individual lastmod dates (Google ignores "always now")
-// 2. Added /contact and /quote at correct priority (conversion pages)
-// 3. Separated changefreq logic — faster-changing pages get "weekly"
-// 4. Added hreflang annotation comment for future multi-language expansion
-// 5. Consistent domain — all URLs use https://unisoftpvt.com (no www)
-// ─────────────────────────────────────────────────────────────────────────────
-
 export const dynamic   = "force-static";
 export const revalidate = 86400; // rebuild at most once per day
 
