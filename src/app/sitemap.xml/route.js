@@ -5,20 +5,20 @@ const BASE_URL = "https://unisoftpvt.com";
 
 // Update when site content meaningfully changes.
 // Google ignores <lastmod> if it is always "now" — keep it accurate.
-const SITE_UPDATED = "2026-11-01";
+const SITE_UPDATED = "2026-11-23";
 
 const staticPages = [
   // Homepage — highest priority
   { path: "/",         changefreq: "weekly",  priority: 1.0 },
 
   // ── Service pages (main revenue pages) ──────────────────────
-  { path: "/services",                       changefreq: "monthly", priority: 0.9 },
-  { path: "/services/software-development",  changefreq: "monthly", priority: 0.9 },
-  { path: "/services/web-development",       changefreq: "monthly", priority: 0.9 },
-  { path: "/services/seo",          changefreq: "monthly", priority: 0.9 },
-  { path: "/services/digital-marketing",     changefreq: "monthly", priority: 0.9 },
-  { path: "/services/ui-ux-design",          changefreq: "monthly", priority: 0.9 },
-  { path: "/services/automation",  changefreq: "monthly", priority: 0.9 },
+  { path: "/services",                       changefreq: "daily", priority: 0.9 },
+  { path: "/services/software-development",  changefreq: "daily", priority: 0.9 },
+  { path: "/services/web-development",       changefreq: "daily", priority: 0.9 },
+  { path: "/services/seo-services",          changefreq: "daily", priority: 0.9 },
+  { path: "/services/digital-marketing",     changefreq: "daily", priority: 0.9 },
+  { path: "/services/ui-ux-design",          changefreq: "daily", priority: 0.9 },
+  { path: "/services/automation-solutions",  changefreq: "daily", priority: 0.9 },
 
   // ── Trust / company pages ───────────────────────────────────
   { path: "/about",     changefreq: "monthly", priority: 0.8 },
