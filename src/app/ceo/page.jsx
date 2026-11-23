@@ -25,7 +25,7 @@ const NAME = "Roshaan Ahmad";
 
 // TODO: one source of truth. Make these match the homepage, About and Portfolio pages
 // (currently: home 100+ projects / 50+ clients, About 50+ / 30+, this page 50+ / 500+).
-const STATS = { projects: "50+", clients: "500+", countries: "10+", years: "5+" };
+const STATS = { projects: "10+", clients: "50+", countries: "5+", years: "3+" };
 
 const title = `${NAME} – Founder & CEO`; // layout.js title template adds " | UniSoft"
 const description =

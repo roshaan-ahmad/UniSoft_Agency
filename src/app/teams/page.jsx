@@ -7,7 +7,7 @@ import { teamSchema } from "../lib/schema";
 const teamMembers = [
   {
     id: 1,
-    name: "Dr. Johnathan Doe",
+    name: "Johnathan Doe",
     role: "Chief Technology Officer",
     short: "CTO",
     img: "member1",
@@ -17,7 +17,7 @@ const teamMembers = [
 
   {
     id: 2,
-    name: "Dr. Roshaan",
+    name: "Roshaan Ahmad",
     role: "Chief Executive Officer",
     short: "CEO",
     img: "member2",

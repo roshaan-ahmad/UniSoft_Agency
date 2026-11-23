@@ -31,21 +31,21 @@ const page = () => {
     //   packageName: "Tester Package",
     //   popular: false
     // },
-    {
-      id:"starter",
-      title: "Starter",
-      priceTag: "$149",
-      price: 149,
-      desc: "Best for small businesses",
-      features: [
-        "1-3 Page Website",
-        "Basic SEO Setup",
-        "Responsive Design",
-        "Email Integration"
-      ],
-      packageName: "Starter Package",
-      popular: false
-    },
+    // {
+    //   id:"starter",
+    //   title: "Starter",
+    //   priceTag: "$149",
+    //   price: 149,
+    //   desc: "Best for small businesses",
+    //   features: [
+    //     "1-3 Page Website",
+    //     "Basic SEO Setup",
+    //     "Responsive Design",
+    //     "Email Integration"
+    //   ],
+    //   packageName: "Starter Package",
+    //   popular: false
+    // },
 
     {
       id:"professional",

@@ -112,13 +112,13 @@ const data = {
 
   pricing: [
     {
-      name: "Landing Page", price: "$499",
+      name: "Landing Page", price: "$399",
       desc: "Perfect for startups and product launches.",
       features: ["1-5 pages", "Mobile responsive", "SEO optimized", "Contact form", "1 month support"],
       popular: false,
     },
     {
-      name: "Business Website", price: "$1,499",
+      name: "Business Website", price: "$899",
       desc: "Complete website for established businesses.",
       features: ["Up to 15 pages", "CMS integration", "Blog setup", "Analytics", "Speed optimization", "3 months support"],
       popular: true,
