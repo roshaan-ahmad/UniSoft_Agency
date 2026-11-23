@@ -42,7 +42,7 @@ const whyPoints = [
   { icon: "ri-code-s-slash-line",      text: "Clean, maintainable codebase"     },
   { icon: "ri-customer-service-2-line",text: "24 / 7 engineering support"       },
   { icon: "ri-bar-chart-line",         text: "Outcomes measured, never assumed" },
-  { icon: "ri-trophy-line",            text: "100 + projects shipped"           },
+  { icon: "ri-trophy-line",            text: "50 + projects shipped"           },
   { icon: "ri-lock-line",              text: "NDA & full confidentiality"       },
 ]
 
@@ -173,10 +173,10 @@ function Contact() {
             {/* Stats bar */}
             <motion.div variants={fadeUp} className="ctStats">
               {[
-                { n: "100+",  label: "Projects delivered" },
+                { n: "50+",  label: "Projects delivered" },
                 { n: "98%",   label: "Client satisfaction" },
                 { n: "<2 hr", label: "Avg. response time"  },
-                { n: "5 yrs", label: "In business"         },
+                { n: "3+ yrs", label: "In business"         },
               ].map((s) => (
                 <div key={s.label} className="ctStat">
                   <strong>{s.n}</strong>

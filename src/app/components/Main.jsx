@@ -20,7 +20,7 @@ const SHOW = {
 
 // TODO: one source of truth. These must match /about, /portfolio and /ceo
 // (About says 50+ projects / 30+ clients, CEO says 500+ clients).
-const STATS = { projects: "100+", clients: "50+", years: "5+" };
+const STATS = { projects: "50+", clients: "30+", years: "3+" };
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -243,7 +243,7 @@ const Main = () => {
                 <span className="mainGrad" aria-hidden="true">
                   <TypeAnimation
                     sequence={[
-                      "Custom Software Development", 2000,
+                      "Custom Software", 2000,
                       "Web Development", 2000,
                       "SEO & Digital Marketing", 2000,
                       "Business Automation", 2000,

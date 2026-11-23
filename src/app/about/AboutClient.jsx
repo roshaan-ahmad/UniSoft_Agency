@@ -141,7 +141,7 @@ function AboutClient() {
           {[
             { value: "50+", label: "Projects Completed" },
             { value: "30+", label: "Happy Clients" },
-            { value: "5+", label: "Years Experience" },
+            { value: "3+", label: "Years Experience" },
           ].map((stat, i) => (
             <motion.div
               key={stat.label}
